@@ -8,7 +8,7 @@ String odpoved="$q1000300000000E5";
 
 String ComPortString = null;
 Serial myPort;  // The serial port
-String cesta;
+String cesta = "C:\\Users\\AKI-ELECTRONIC\\Documents\\FotoRobot";
 String soubor;
 String datum;
 Capture cam;
@@ -56,7 +56,7 @@ while (myPort.available() > 0) {
       datum=ziskej_datum();
       soubor = cesta+"\\"+ datum+".jpg";
       println(soubor);
-      delay(5000);
+      //delay(5000);
       saveFrame(soubor);
       }
     }
@@ -65,7 +65,8 @@ while (myPort.available() > 0) {
 
 void folderSelected(File selection) {
   if (selection == null) {
- 
+ cesta = "C:\\Users\\AKI-ELECTRONIC\\Documents\\FotoRobot";
+
   } else {
     println("User selected " + selection.getAbsolutePath());
     cesta = selection.getAbsolutePath();
@@ -109,20 +110,7 @@ void Initserial(){
     ComPortString = myPort.readStringUntil(cr);
     Odpoved=ComPortString;
       
-    /*
-      print("CPS=");
-      print(ComPortString);
-      println(".");
-      
-      print("ODP=");
-      print(Odpoved);
-      println(".");
-    
-    
-      print("INT=");
-      print(Init2);
-      println(".");
-    */
+   
 };
 
       
