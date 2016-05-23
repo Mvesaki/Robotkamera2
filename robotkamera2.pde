@@ -11,6 +11,7 @@ Serial myPort;  // The serial port
 String cesta = "C:\\Users\\AKI-ELECTRONIC\\Documents\\FotoRobot";
 String soubor;
 String datum;
+String cisloKusu = "";
 Capture cam;
 
 void setup() {
@@ -49,13 +50,15 @@ void draw() {
     cam.read();
   }
   set(0, 0, cam);
+  fill(256,0,0);
+  text(cisloKusu,100,50);
 
 while (myPort.available() > 0) {
     String inBuffer = myPort.readString();   
     if (inBuffer != null) {
       println(inBuffer);
       datum=ziskej_datum();
-      soubor = cesta+"\\"+ datum+".jpg";
+      soubor = cesta+"\\"+ datum+"-"+cisloKusu+".jpg";
       println(soubor);
       fill(0,256,0);
       text(soubor,100,100);
@@ -123,3 +126,16 @@ void Initserial(){
     
     println("---------");
  };
+ 
+ void keyPressed() {
+  //cisloKusu="";
+  if (keyCode == BACKSPACE) {
+    if (cisloKusu.length() > 0) {
+      cisloKusu = cisloKusu.substring(0, cisloKusu.length()-1);
+    }
+  } else if (keyCode == DELETE) {
+    cisloKusu = "";
+  } else if (keyCode != SHIFT && keyCode != CONTROL && keyCode != ALT) {
+    cisloKusu = cisloKusu + key;
+  }
+}
