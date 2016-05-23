@@ -15,7 +15,7 @@ Capture cam;
 
 void setup() {
   
-  size(1280, 960);
+  size(1600, 896);
   Initserial();
 
 //nastaveni ukladani
@@ -29,16 +29,17 @@ selectFolder("Zadej adresář pro ukládání:", "folderSelected");
     exit();
   } else {
     println("Available cameras:");
-    for (int i = 0; i < cameras.length; i++) {
+   /* for (int i = 0; i < cameras.length; i++) {
       print(i);
       print(": ");
       println(cameras[i]);
-    }
+    }*/
     
     // The camera can be initialized directly using an 
     // element from the array returned by list():
-    cam = new Capture(this, cameras[83]);
-    cam.start();     
+    cam = new Capture(this, cameras[85]);
+    cam.start();
+    textSize(32);
   }      
 
 }
@@ -56,6 +57,8 @@ while (myPort.available() > 0) {
       datum=ziskej_datum();
       soubor = cesta+"\\"+ datum+".jpg";
       println(soubor);
+      fill(0,256,0);
+      text(soubor,100,100);
       //delay(5000);
       saveFrame(soubor);
       }
